@@ -1,5 +1,5 @@
 <template>
-  <span v-el:trigger>
+  <span ref="trigger">
     <slot>
     </slot>
   </span>
@@ -10,7 +10,7 @@
     'right':  placement === 'right',
     'bottom': placement === 'bottom'
     }"
-    v-el:popover
+    ref="popover"
     v-show="show"
     :transition="effect"
     role="tooltip">

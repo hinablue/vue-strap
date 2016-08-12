@@ -1,5 +1,5 @@
 <template>
-  <nav v-el:navbar :class="['navbar',{
+  <nav ref="navbar" :class="['navbar',{
     'navbar-inverse':(type == 'inverse'),
     'navbar-default':(type == 'default'),
     'navbar-fixed-top':(placement === 'top'),
@@ -66,7 +66,7 @@ export default {
       o.classList.toggle('collapse')
     }
   },
-  ready () {
+  mounted () {
     const dropdowns = this.$el.querySelector('.dropdown > .dropdown-toggle')
     const toggle = this.$el.querySelector('[data-toggle="collapse"]')
     if (dropdowns) {

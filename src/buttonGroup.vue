@@ -20,7 +20,7 @@ export default {
       default: 'default'
     }
   },
-  created () {
+  mounted () {
     this._btnGroup = true
   }
 }

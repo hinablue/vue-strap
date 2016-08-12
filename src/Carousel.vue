@@ -104,7 +104,7 @@ export default {
       this.activeIndex === 0 ? this.activeIndex = this.slider.length - 1 : this.activeIndex -= 1
     }
   },
-  ready () {
+  mounted () {
     let intervalID = null
     const el = this.$el
     function intervalManager (flag, func, time) {

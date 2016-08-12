@@ -18,7 +18,7 @@ export default {
       default: 'default'
     }
   },
-  created () {
+  mounted () {
     this._checkboxGroup = true
   }
 }

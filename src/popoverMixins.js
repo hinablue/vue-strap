@@ -40,10 +40,10 @@ export default {
       this.show = !this.show
     }
   },
-  ready () {
-    if (!this.$els.popover) return console.error("Couldn't find popover v-el in your component that uses popoverMixin.")
-    const popover = this.$els.popover
-    const triger = this.$els.trigger.children[0]
+  mounted () {
+    if (!this.$refs.popover) return console.error("Couldn't find popover v-el in your component that uses popoverMixin.")
+    const popover = this.$refs.popover
+    const triger = this.$refs.trigger.children[0]
     if (this.trigger === 'hover') {
       this._mouseenterEvent = EventListener.listen(triger, 'mouseenter', () => { this.show = true })
       this._mouseleaveEvent = EventListener.listen(triger, 'mouseleave', () => { this.show = false })

@@ -1,7 +1,7 @@
 <template>
   <label :class="[(buttonStyle?'btn btn-':'rb rb-')+typeColor,{'active':active}]">
     <input type="radio" autocomplete="off"
-      v-el:input
+      ref="input"
       :checked="active"
       :value="value"
       :name="name"
@@ -70,7 +70,7 @@ export default {
       parent._radioGroup = true
     }
   },
-  ready () {
+  mounted () {
     if (!this.$parent._radioGroup) return
     if (this.$parent.value) {
       this.checked = (this.$parent.value === this.value)
@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     focus () {
-      this.$els.input.focus()
+      this.refs.input.focus()
     },
     toggle () {
       this.focus()

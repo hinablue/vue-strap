@@ -40,7 +40,7 @@ export default {
       return this.size ? 'spinner-' + this.size : 'spinner-sm'
     }
   },
-  ready () {
+  mounted () {
     this._body = document.querySelector('body')
     this._bodyOverflow = this._body.style.overflowY || ''
   },

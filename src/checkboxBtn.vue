@@ -44,7 +44,7 @@ export default {
       this.checked = !this.checked
     }
   },
-  created () {
+  mounted () {
     if (this.$parent.value.length) {
       this.checked = this.$parent.value.indexOf(this.value) > -1
     } else if (this.checked) {

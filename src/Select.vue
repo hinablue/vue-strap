@@ -6,7 +6,7 @@
 <div :class="{'btn-group btn-group-justified': justified, 'btn-select': !justified}" @click="unblur">
   <slot name="before"></slot>
   <div class="btn-group" :class="{open: show}">
-    <button v-el:btn type="button" class="form-control dropdown-toggle"
+    <button ref="btn" type="button" class="form-control dropdown-toggle"
       :disabled="disabled || !hasParent"
       :readonly="readonly"
       @click="toggleDropdown()"
@@ -21,7 +21,7 @@
       <template v-if="options.length">
         <li v-if="search" class="bs-searchbox">
           <input type="text" placeholder="{{searchText||text.search}}" class="form-control" autocomplete="off"
-            v-el:search
+            ref="search"
             v-model="searchValue"
             @blur="blur()"
             @keyup.esc="blur()"
@@ -136,7 +136,7 @@ export default {
       default: true
     }
   },
-  ready () {
+  mounted () {
     if (this.value === undefined || !this.parent) { this.value = null }
     if (!this.multiple && this.value instanceof Array) {
       this.value = this.value.shift()
@@ -280,9 +280,9 @@ export default {
     },
     focus () {
       if (this.show) {
-        (this.$els.search || this.$els.btn).focus()
+        (this.refs.search || this.refs.btn).focus()
       } else {
-        this.$els.btn.focus()
+        this.refs.btn.focus()
       }
     },
     update () {

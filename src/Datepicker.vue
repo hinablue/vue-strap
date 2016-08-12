@@ -98,7 +98,7 @@ export default {
       default: navigator.language
     }
   },
-  ready () {
+  mounted () {
     this.$dispatch('child-created', this)
     this.currDate = this.parse(this.value) || this.parse(new Date())
     this._closeEvent = EventListener.listen(window, 'click', (e) => {

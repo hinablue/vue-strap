@@ -1,7 +1,7 @@
 <template>
   <div class="form-group" @click="focus()" :class="{'has-feedback':icon,'has-error':valid===false,'has-success':valid===true}">
     <label v-if="label" class="control-label">{{label}}</label>
-    <textarea v-if="type=='textarea'" class="form-control" v-el:input v-model="value"
+    <textarea v-if="type=='textarea'" class="form-control" ref="input" v-model="value"
       :cols="cols"
       :rows="rows"
       :name="name"
@@ -16,7 +16,7 @@
     <template v-else>
       <div v-if="slots.before||slots.after" class="input-group">
         <slot name="before"></slot>
-        <input class="form-control" v-el:input v-model="value"
+        <input class="form-control" ref="input" v-model="value"
           :name="name"
           :type="type"
           :readonly="readonly"
@@ -29,7 +29,7 @@
         />
         <slot name="after"></slot>
       </div>
-      <input v-else class="form-control" v-el:input v-model="value"
+      <input v-else class="form-control" ref="input" v-model="value"
         :name="name"
         :type="type"
         :readonly="readonly"
@@ -195,7 +195,7 @@ export default {
   },
   methods: {
     focus () {
-      this.$els.input.focus()
+      this.refs.input.focus()
     },
     eval () {
       let value = this.value || ''
@@ -217,7 +217,7 @@ export default {
       if (this.match!==null && this.match !== value) { return false }
       if (value.length < this.minlength) { return false }
       let valid = true
-      if (this.$els.input.checkValidity && !this.$els.input.checkValidity()){ return false }
+      if (this.refs.input.checkValidity && !this.refs.input.checkValidity()){ return false }
       if (this.pattern instanceof Function) valid = this.pattern(this.value)
       if (typeof this.pattern === 'string') {
         let regex = new RegExp(this.pattern)
@@ -229,8 +229,8 @@ export default {
       if (!this.noValidate && !enable) { this.valid = this.validate() }
       ['change', 'keypress', 'keydown', 'keyup'].forEach((event) => {
         enable
-        ? this.$els.input.addEventListener(event, this.eval)
-        : this.$els.input.removeEventListener(event, this.eval)
+        ? this.refs.input.addEventListener(event, this.eval)
+        : this.refs.input.removeEventListener(event, this.eval)
       })
     }
   }

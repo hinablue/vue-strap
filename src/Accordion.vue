@@ -24,7 +24,7 @@ export default {
       return true
     }
   },
-  created () {
+  mounted () {
     this.$on('isOpenEvent', (child) => {
       if (this.oneAtATime) {
         this.$children.forEach((item) => {

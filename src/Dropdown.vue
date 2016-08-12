@@ -1,6 +1,6 @@
 <template>
-  <li v-if="$parent.navbar||$parent.menu||$parent._tabset" v-el:dropdown class="dropdown {{disabled&&'disabled'}}" :class="classes">
-      <a v-if="text" v-el:btn class="dropdown-toggle" role="button" :class="{disabled: disabled}"
+  <li v-if="$parent.navbar||$parent.menu||$parent._tabset" ref="dropdown" class="dropdown {{disabled&&'disabled'}}" :class="classes">
+      <a v-if="text" ref="btn" class="dropdown-toggle" role="button" :class="{disabled: disabled}"
         @click="show?blur():toggle()"
         @blur="blur()"
         @keyup.esc="show = false"
@@ -8,7 +8,7 @@
         {{ text }}
         <span class="caret"></span>
       </a>
-      <button type="button" class="secret" v-el:btn
+      <button type="button" class="secret" ref="btn"
         @click="show?blur():toggle()"
         @blur="blur()"
         @keyup.esc="show = false"
@@ -20,8 +20,8 @@
       <slot></slot>
     </ul>
   </li>
-  <div v-else v-el:dropdown class="btn-group" :class="classes">
-      <button v-if="text" v-el:btn type="button" class="btn btn-{{type||'default'}} dropdown-toggle"
+  <div v-else ref="dropdown" class="btn-group" :class="classes">
+      <button v-if="text" ref="btn" type="button" class="btn btn-{{type||'default'}} dropdown-toggle"
         @click="show?blur():toggle()"
         @blur="blur"
         @keyup.esc="show = false"
@@ -68,8 +68,8 @@ export default {
       return [{open: this.show}, this.class]
     },
     button () {
-      if (this.$els.btn) return this.$els.btn
-      return this.$els.dropdown.querySelector('[data-toggle="dropdown"]')
+      if (this.refs.btn) return this.$els.btn
+      return this.refs.dropdown.querySelector('[data-toggle="dropdown"]')
     },
     menu () {
       return !this.$parent || this.$parent.navbar
@@ -106,8 +106,8 @@ export default {
       this.show = !this.show
     }
   },
-  ready () {
-    const el = this.$els.dropdown
+  mounted () {
+    const el = this.refs.dropdown
     if (!this.text) {
       const toggle = el.querySelector('[data-toggle="dropdown"]')
       if (toggle) {

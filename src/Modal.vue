@@ -85,7 +85,7 @@ export default {
       default: false
     }
   },
-  ready () {
+  mounted () {
     this.$watch('show', (val) => {
       const el = this.$el
       const body = document.body

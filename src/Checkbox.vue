@@ -1,7 +1,7 @@
 <template>
   <label :class="[(buttonStyle?'btn btn-':'cb cb-')+typeColor,{'active':checked}]">
     <input type="checkbox" autocomplete="off"
-      v-el:input
+      ref="input"
       :checked="checked"
       :name="name"
       :readonly="readonly"
@@ -69,7 +69,7 @@ export default {
       parent._checkboxGroup = true
     }
   },
-  ready () {
+  mounted () {
     if (!this.$parent._checkboxGroup || typeof this.value === 'boolean') return
     if (!(this.$parent.value instanceof Array)) this.$parent.value = []
     if (this.$parent.value.length) {
@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     focus () {
-      this.$els.input.focus()
+      this.refs.input.focus()
     },
     toggle () {
       this.focus()

@@ -10,7 +10,7 @@
       </dropdown>
     </template>
   </ul>
-  <div class="tab-content" v-el:tab-content>
+  <div class="tab-content" ref="tab-content">
     <slot></slot>
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
       this.show = this.tabs[val]
     }
   },
-  ready () {
+  mounted () {
     this.show = this.tabs[this.active]
   },
   methods: {
